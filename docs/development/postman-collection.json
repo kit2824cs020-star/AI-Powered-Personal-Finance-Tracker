@@ -1,0 +1,13 @@
+{
+  "info": {"name":"FinWise API","schema":"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"},
+  "variable":[{"key":"baseUrl","value":"http://localhost:8080/api"},{"key":"token","value":""}],
+  "item":[
+    {"name":"Register","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\"name\":\"Test User\",\"email\":\"test@example.test\",\"password\":\"StrongPass123\"}"},"url":"{{baseUrl}}/auth/register"}},
+    {"name":"Login","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\"email\":\"test@example.test\",\"password\":\"StrongPass123\"}"},"url":"{{baseUrl}}/auth/login"}},
+    {"name":"Current user","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{baseUrl}}/me"}},
+    {"name":"Create expense","request":{"method":"POST","header":[{"key":"Authorization","value":"Bearer {{token}}"},{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\"type\":\"expense\",\"category\":\"food\",\"description\":\"Test lunch\",\"amountPaise\":25000,\"date\":\"2026-11-10\",\"paymentMethod\":\"UPI\",\"recurring\":false}"},"url":"{{baseUrl}}/transactions"}},
+    {"name":"List transactions","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{baseUrl}}/transactions"}},
+    {"name":"Monthly summary","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{baseUrl}}/reports/summary?month=2026-11"}},
+    {"name":"Yearly report","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{baseUrl}}/reports/yearly?year=2026"}}
+  ]
+}

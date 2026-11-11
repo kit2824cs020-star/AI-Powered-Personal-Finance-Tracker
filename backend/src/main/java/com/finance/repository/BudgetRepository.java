@@ -1,0 +1,1 @@
+package com.finance.repository; import com.finance.model.Budget; import org.springframework.data.mongodb.repository.MongoRepository; import java.util.List; import java.util.Optional; public interface BudgetRepository extends MongoRepository<Budget,String>{ List<Budget> findByUserId(String userId); Optional<Budget> findByIdAndUserId(String id,String userId); }

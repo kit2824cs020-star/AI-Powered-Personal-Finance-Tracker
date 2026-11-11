@@ -1,0 +1,3 @@
+package com.finance.model;
+import org.springframework.data.annotation.Id; import org.springframework.data.mongodb.core.mapping.Document; 
+@Document("budgets") public class Budget { @Id private String id; private String userId; private String category; private long limitPaise; private String month; public String getId(){return id;} public void setId(String v){id=v;} public String getUserId(){return userId;} public void setUserId(String v){userId=v;} public String getCategory(){return category;} public void setCategory(String v){category=v;} public long getLimitPaise(){return limitPaise;} public void setLimitPaise(long v){limitPaise=v;} public String getMonth(){return month;} public void setMonth(String v){month=v;} }

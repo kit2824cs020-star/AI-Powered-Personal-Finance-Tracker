@@ -1,0 +1,10 @@
+package com.finance.controller;
+import org.springframework.beans.factory.annotation.Value;import org.springframework.core.io.ByteArrayResource;import org.springframework.http.*;import org.springframework.security.core.Authentication;import org.springframework.util.*;import org.springframework.web.bind.annotation.*;import org.springframework.web.client.RestClient;import org.springframework.web.multipart.MultipartFile;import java.util.*;
+@RestController @RequestMapping("/api/ai") public class AiController {private final RestClient client;public AiController(@Value("${app.ai-service-url}") String url){client=RestClient.builder().baseUrl(url).build();}
+ @PostMapping("/categorize") public Object categorize(@RequestBody Map<String,Object> body){return client.post().uri("/categorize").body(body).retrieve().body(Object.class);}
+ @PostMapping("/forecast") public Object forecast(@RequestBody Map<String,Object> body){return client.post().uri("/forecast").body(body).retrieve().body(Object.class);}
+ @PostMapping("/budget-recommendations") public Object budgetRecommendations(@RequestBody Map<String,Object> body){return client.post().uri("/budget-recommendations").body(body).retrieve().body(Object.class);}
+ @PostMapping("/anomalies") public Object anomalies(@RequestBody Map<String,Object> body){return client.post().uri("/anomalies").body(body).retrieve().body(Object.class);}
+ @PostMapping("/assistant") public Object assistant(@RequestBody Map<String,Object> body){return client.post().uri("/assistant").body(body).retrieve().body(Object.class);}
+ @PostMapping(value="/receipt",consumes=MediaType.MULTIPART_FORM_DATA_VALUE) public Object receipt(@RequestPart("file") MultipartFile file)throws Exception{var resource=new ByteArrayResource(file.getBytes()){@Override public String getFilename(){return file.getOriginalFilename()==null?"receipt":file.getOriginalFilename();}};var data=new LinkedMultiValueMap<String,Object>();data.add("file",resource);return client.post().uri("/receipt").contentType(MediaType.MULTIPART_FORM_DATA).body(data).retrieve().body(Object.class);}
+}
